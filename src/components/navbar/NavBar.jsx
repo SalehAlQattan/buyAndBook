@@ -1,44 +1,52 @@
-// rect
-import { observer } from 'mobx-react';
+// react
 import React from 'react';
 
-// router
-import { Link } from 'react-router-dom';
+// mobx
+import { observer } from 'mobx-react';
 
 // components
+import { NavBarStyled } from './styles';
+import { NavItem } from './styles';
 
 // stores
 import authStore from '../../stores/authStore';
 
 const NavBar = () => {
-  return (
-    <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-      <div className='container-fluid'>
-        <div
-          className='d-flex justify-content-center collapse navbar-collapse'
-          id='id="navbarNav"'
-        >
-          <ul className='navbar-nav fs-3'>
-            {authStore.user && (
-              <li className='nav-item'>
-                Welcome Back {authStore.user.username}
-              </li>
-            )}
+  //
+  function toPascalCase(string) {
+    return `${string}`
+      .replace(new RegExp(/[-_]+/, 'g'), ' ')
+      .replace(new RegExp(/[^\w\s]/, 'g'), '')
+      .replace(
+        new RegExp(/\s+(.)(\w+)/, 'g'),
+        ($1, $2, $3) => `${$2.toUpperCase() + $3.toLowerCase()}`
+      )
+      .replace(new RegExp(/\s/, 'g'), '')
+      .replace(new RegExp(/\w/), (s) => s.toUpperCase());
+  }
 
-            <li className='nav-item'>
-              <Link to='/' className='nav-link'>
-                Home
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link to='/products' className='nav-link'>
-                Products
-              </Link>
-            </li>
-          </ul>
+  return (
+    <NavBarStyled>
+      {authStore.user && (
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <NavItem to='/'>
+            <button
+              className='btn btn-secondary'
+              onClick={() => authStore.signout()}
+            >
+              Signout
+            </button>
+          </NavItem>
+          <h2>Welcome Back {toPascalCase(authStore.user.username)}</h2>
         </div>
-      </div>
-    </nav>
+      )}
+      <NavItem to='/'>
+        <h2>Home</h2>
+      </NavItem>
+      <NavItem to='/products'>
+        <h2>Products</h2>
+      </NavItem>
+    </NavBarStyled>
   );
 };
 

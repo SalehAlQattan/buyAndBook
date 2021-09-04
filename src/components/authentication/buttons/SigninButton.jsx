@@ -13,7 +13,7 @@ const SigninButton = () => {
 
   return (
     <div>
-      <button onClick={openModal} className='btn btn-primary'>
+      <button onClick={openModal} className='btn btn-secondary'>
         Signin
       </button>
       <SigninModal isOpen={isOpen} closeModal={closeModal} />

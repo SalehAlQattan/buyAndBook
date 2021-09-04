@@ -10,6 +10,7 @@ import productStore from '../../stores/productStore';
 // components
 import ProductItem from './ProductItem';
 import CreateButton from './buttons/CreateButton';
+import BookingItem from '../book/BookingItem';
 
 const ProductList = () => {
   const productList = productStore.products.map((product) => (
@@ -18,6 +19,7 @@ const ProductList = () => {
   return (
     <>
       <CreateButton />
+      <BookingItem />
       <div
         className='container'
         style={{
