@@ -25,16 +25,19 @@ class ProductStore {
 
   // fetch on product
   getProductById = (productId) => {
-    this.products.find((product) => product.id === productId);
+    this.products.find((product) => product._id === productId);
   };
 
   // craete new product
   createProduct = async (newProduct) => {
+    console.log(newProduct);
     try {
       // creating form data to send the request
       const formData = new FormData();
 
       for (const key in newProduct) formData.append(key, newProduct[key]);
+
+      console.log(formData);
 
       const response = await instance.post('/products', formData);
 
@@ -59,7 +62,7 @@ class ProductStore {
       );
 
       const product = this.products.find(
-        (product) => product.id === updatedProduct.id
+        (product) => product._id === updatedProduct._id
       );
 
       for (const key in product) product[key] = response.data[key];
@@ -73,7 +76,7 @@ class ProductStore {
     try {
       await instance.delete(`/products/${productId}`);
       let filteredProduct = this.products.filter(
-        (product) => product.id !== productId
+        (product) => product._id !== productId
       );
       this.products = filteredProduct;
     } catch (error) {

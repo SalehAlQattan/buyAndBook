@@ -22,7 +22,7 @@ const UpdateModal = ({ isOpen, closeModal, foundProduct }) => {
 
   // product state
   const [product, setProduct] = useState({
-    id: foundProduct.id,
+    id: foundProduct._id,
     name: foundProduct.name,
     description: foundProduct.description,
     price: foundProduct.price,

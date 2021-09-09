@@ -14,7 +14,7 @@ import BookingItem from '../book/BookingItem';
 
 const ProductList = () => {
   const productList = productStore.products.map((product) => (
-    <ProductItem key={product.id} product={product} />
+    <ProductItem key={product._id} product={product} />
   ));
   return (
     <>

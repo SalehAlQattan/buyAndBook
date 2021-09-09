@@ -59,7 +59,7 @@ const ProductDetails = () => {
             <button className='btn btn-primary'>Go Back</button>
           </Link>
           <button
-            onClick={() => productStore.deleteProduct(foundProduct.id)}
+            onClick={() => productStore.deleteProduct(foundProduct._id)}
             className='btn btn-danger'
           >
             DELETE
